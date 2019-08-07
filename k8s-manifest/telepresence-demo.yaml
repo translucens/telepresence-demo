@@ -79,9 +79,12 @@ spec:
     spec:
       containers:
       - name: devapp
-        image: translucens/telepresence-demoapp
+        image: translucens/telepresence-demoapp:go-demo
         ports:
         - containerPort: 8080
+        env:
+          - name: PORT
+            value: "8080"
 ---
 apiVersion: apps/v1
 kind: Deployment
