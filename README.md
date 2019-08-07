@@ -1,5 +1,13 @@
 # Telepresence Demo
 
+![構成図](https://github.com/translucens/telepresence-demo/blob/master/telepresence-demo-architecture.png)
+
+Telepresenceを使って、クラスタにあったGoのコンテナをローカルのものに差し替えつつ下記の操作が可能なことが分かるデモです。
+
+1. クラスタの他のPodからの通信を受ける
+1. ローカルのコンテナからServiceの名前解決を行う
+1. ローカルのコンテナからServiceへ通信する
+
 ## バージョン情報
 
 * telepresence: 0.101
