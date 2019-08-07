@@ -30,6 +30,7 @@ func main() {
 		}
 		defer resp.Body.Close()
 
+		w.Header().Set("Via", fmt.Sprintf("%s Go-demo-proxy", r.Proto))
 		w.WriteHeader(http.StatusOK)
 		bytes, err := io.Copy(w, resp.Body)
 		if err != nil {

@@ -22,7 +22,7 @@ kubectl apply -f ./k8s-manifest/telepresence-demo.yaml
 
 # 動作確認
 CURL_POD=$(kubectl get po -l app=curl -ojsonpath='{.items[0].metadata.name}')
-kubectl exec $CURL_POD -- curl devapp:8080
+kubectl exec $CURL_POD -- curl -v devapp:8080
 # nginx のデフォルトページが出ればOK
 ```
 
@@ -30,6 +30,7 @@ kubectl exec $CURL_POD -- curl devapp:8080
 
 ```sh
 # go-demo/facade.go の内容を変更
+# 注: 本来は接続先は環境変数に設定して再ビルドを避ける方が良いが、デモ用のサンプルコードなので……
 sed -i -e "s/backend-1/backend-2/" ./go-demo/facade.go
 
 # Dockerイメージをビルド
@@ -42,6 +43,6 @@ telepresence --swap-deployment devapp --docker-run go-demo:v2 /demoapp
 
 # 動作確認
 CURL_POD=$(kubectl get po -l app=curl -ojsonpath='{.items[0].metadata.name}')
-kubectl exec $CURL_POD -- curl devapp:8080
+kubectl exec $CURL_POD -- curl -v devapp:8080
 # Apache httpdのデフォルトページ (It works!) が出ればOK
 ```
